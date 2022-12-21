@@ -1,6 +1,14 @@
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useState, useEffect } from "react";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+function ArrowButton(props: { direction: "left" | "right" }) {
+  return (
+    <button type="button" className="block border rounded px-2">
+      {props.direction == "left" ? <FiChevronLeft /> : <FiChevronRight />}
+    </button>
+  );
+}
 
 export default function App() {
   const [date, setDate] = useState(dayjs());
@@ -31,13 +39,9 @@ export default function App() {
     <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full">
       <h2 className="text-center border rounded-lg p-2 mb-0">Daily Quote</h2>
       <div className="border rounded-lg flex justify-between p-2">
-        <button type="button" className="block border rounded px-2">
-          <FiChevronLeft />
-        </button>
+        <ArrowButton direction="left" />
         <span className="font-bold">{date.format("D MMMM")}</span>
-        <button type="button" className="block border rounded px-2">
-          <FiChevronRight />
-        </button>
+        <ArrowButton direction="right" />
       </div>
       <div className="border rounded-lg p-4 flex-grow-1 h-fit overflow-auto">
         <h4 className="mt-0 text-center">{!quote ? "" : quote.topic}</h4>
