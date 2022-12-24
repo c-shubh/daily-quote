@@ -23,7 +23,7 @@ function DayPickerDialog(props: {
   return (
     <div
       className={`absolute inset-0 bg-[hsl(0deg_0%_0%_/_80%)] flex justify-center grid grid-rows-4 ${
-        mapping[props.open + ""]
+        mapping[`${props.open}`]
       }`}
       onClick={() => props.setOpen(!props.open)}
     >
@@ -82,7 +82,7 @@ export default function App() {
     <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full">
       <DayPickerDialog
         selected={date.toDate()}
-        onSelect={(d: Date) => setDate(dayjs(d))}
+        onSelect={(d) => setDate(dayjs(d))}
         open={dialogOpen}
         setOpen={setDialogOpen}
       />
