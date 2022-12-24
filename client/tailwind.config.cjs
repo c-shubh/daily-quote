@@ -5,4 +5,7 @@ module.exports = {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
+  corePlugins: {
+    preflight: true,
+  },
 };
