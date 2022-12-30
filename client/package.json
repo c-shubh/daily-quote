@@ -1,33 +1,33 @@
 {
   "name": "daily-quote",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "deploy": "NODE_DEBUG=gh-pages node deploy-gh-pages.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
-    "react": "^18.2.0",
+    "next": "13.1.1",
+    "react": "18.2.0",
     "react-day-picker": "^8.4.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "18.2.0",
     "react-icons": "^4.7.1"
   },
   "devDependencies": {
+    "@next/font": "13.1.1",
     "@tailwindcss/typography": "^0.5.8",
-    "@types/gh-pages": "^3.2.1",
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "@vitejs/plugin-react": "^2.2.0",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
     "autoprefixer": "^10.4.13",
-    "gh-pages": "^4.0.0",
-    "postcss": "^8.4.19",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.1.1",
+    "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3"
+    "typescript": "4.9.4"
   }
 }
