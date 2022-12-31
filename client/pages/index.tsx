@@ -30,10 +30,7 @@ function DayPickerDialog(props: {
       <div onClick={(e) => e.stopPropagation()} className="row-start-2">
         <DayPicker
           mode="single"
-          captionLayout="dropdown"
           selected={props.selected}
-          fromYear={props.selected.getFullYear()}
-          toYear={props.selected.getFullYear()}
           onSelect={props.onSelect}
           className="bg-white border rounded p-4 shadow-md"
           onDayClick={() => props.setOpen(false)}
