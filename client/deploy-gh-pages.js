@@ -15,6 +15,7 @@ subProcess.exec(lastCommitCommand, (error, stdout, stderr) => {
     "out",
     {
       message: `from ${stdout}`,
+      dotfiles: true,
     },
     (err) => {
       if (err) {
