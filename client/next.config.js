@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  basePath: "/daily-quote",
+  basePath: process.env.NODE_ENV == "production" ? "/daily-quote" : "",
 };
 
 module.exports = nextConfig;
