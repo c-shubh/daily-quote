@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import "react-day-picker/dist/style.css";
+import { BsInfoCircle } from "react-icons/bs";
 import { CSSTransition } from "react-transition-group";
 import ArrowButton from "../components/ArrowButton";
 import DayPickerDialog from "../components/DayPickerDialog";
@@ -67,7 +68,12 @@ export default function Home() {
         setOpen={setDialogOpen}
       />
       <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full">
-        <h2 className="text-center border rounded-lg p-2 m-0">Daily Quote</h2>
+        <h2 className="relative text-center border rounded-lg p-2 m-0">
+          Daily Quote
+          <button type="button" className="absolute right-5 top-0 bottom-0 flex items-center">
+            <BsInfoCircle className="block w-5 h-5 text-slate-400" />
+          </button>
+        </h2>
         <div className="border rounded-lg flex justify-between p-2">
           <ArrowButton direction="left" onClick={() => previousDate()} />
           <button
