@@ -1,45 +1,10 @@
 import dayjs from "dayjs";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
-import { DayPicker, SelectSingleEventHandler } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { CSSTransition } from "react-transition-group";
-
-function ArrowButton(props: { direction: "left" | "right"; onClick?: any }) {
-  return (
-    <button type="button" className="block border rounded px-2" onClick={props.onClick}>
-      {props.direction == "left" ? <FiChevronLeft /> : <FiChevronRight />}
-    </button>
-  );
-}
-
-function DayPickerDialog(props: {
-  selected: Date;
-  onSelect: SelectSingleEventHandler;
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  const mapping = { true: "", false: "hidden" };
-  return (
-    <div
-      className={`absolute inset-0 bg-[hsl(0deg_0%_0%_/_80%)] flex justify-center grid grid-rows-4 ${
-        mapping[`${props.open}`]
-      }`}
-      onClick={() => props.setOpen(!props.open)}
-    >
-      <div onClick={(e) => e.stopPropagation()} className="row-start-2">
-        <DayPicker
-          mode="single"
-          selected={props.selected}
-          onSelect={props.onSelect}
-          className="bg-white border rounded p-4 shadow-md"
-          onDayClick={() => props.setOpen(false)}
-        />
-      </div>
-    </div>
-  );
-}
+import ArrowButton from "../components/ArrowButton";
+import DayPickerDialog from "../components/DayPickerDialog";
 
 /* Fetch quote for given `date` from db */
 async function fetchQuote(date: dayjs.Dayjs) {
