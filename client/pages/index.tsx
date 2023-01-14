@@ -33,12 +33,15 @@ export default function Home() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [quoteVisible, setQuoteVisible] = useState(true);
   const quoteDivRef = useRef(null);
+  const [loadingHidden, setLoadingHidden] = useState(true);
 
   /* ------------------------------ Functions ------------------------------- */
   useEffect(() => {
     async function asyncInsideUseEffect() {
+      setLoadingHidden(false);
       setQuoteVisible(false);
       setQuote(await fetchQuote(date));
+      setLoadingHidden(true);
       setQuoteVisible(true);
     }
     asyncInsideUseEffect();
@@ -79,16 +82,18 @@ export default function Home() {
           <ArrowButton direction="right" onClick={() => nextDate()} />
         </div>
         <div className="border rounded-lg p-4 flex-grow-1 h-fit overflow-auto">
+          <div className={`${loadingHidden ? "hidden" : ""} text-center`}>Loading...</div>
           {quote && (
             <CSSTransition
               nodeRef={quoteDivRef}
               key={quote?._id}
-              timeout={500}
+              timeout={250}
               classNames="fade"
               in={quoteVisible}
               appear={true}
+              unmountOnExit={true}
             >
-              <div ref={quoteDivRef}>
+              <div ref={quoteDivRef} className="bg-white z-10">
                 <h4 className="mt-0 text-center">{quote?.topic}</h4>
                 <p className="mb-0">{quote?.text}</p>
               </div>
