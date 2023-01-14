@@ -7,3 +7,29 @@ body,
 #__next {
   height: 100%;
 }
+
+/* ----------------------- for quote fade transition ------------------------ */
+
+.fade-enter,
+.fade-appear {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-appear-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms linear;
+}
+
+.fade-exit-done {
+  opacity: 0;
+}

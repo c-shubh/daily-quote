@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DayPicker, SelectSingleEventHandler } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { CSSTransition } from "react-transition-group";
 
 function ArrowButton(props: { direction: "left" | "right"; onClick?: any }) {
   return (
@@ -42,28 +43,38 @@ function DayPickerDialog(props: {
 
 /* Fetch quote for given `date` from db */
 async function fetchQuote(date: dayjs.Dayjs) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${date.format("MMMM")}/${date.format("D")}`);
+  const month = date.format("MMMM");
+  const dateOfMonth = date.format("D");
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${month}/${dateOfMonth}`);
   const quote_resp = await response.json();
   return quote_resp;
 }
 
 export default function Home() {
+  /* --------------------------- State variables ---------------------------- */
+
   /* Store date of currently visible quote */
   const [date, setDate] = useState(dayjs());
 
   /* Quote as returned from db */
   const [quote, setQuote] = useState(
     null as unknown as {
+      _id: string;
       topic: string;
       text: string;
     }
   );
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [quoteVisible, setQuoteVisible] = useState(true);
+  const quoteDivRef = useRef(null);
 
+  /* ------------------------------ Functions ------------------------------- */
   useEffect(() => {
     async function asyncInsideUseEffect() {
+      setQuoteVisible(false);
       setQuote(await fetchQuote(date));
+      setQuoteVisible(true);
     }
     asyncInsideUseEffect();
   }, [date]);
@@ -75,6 +86,7 @@ export default function Home() {
     setDate(date.subtract(1, "day"));
   }
 
+  /* --------------------------------- JSX ---------------------------------- */
   return (
     <>
       <Head>
@@ -102,8 +114,21 @@ export default function Home() {
           <ArrowButton direction="right" onClick={() => nextDate()} />
         </div>
         <div className="border rounded-lg p-4 flex-grow-1 h-fit overflow-auto">
-          <h4 className="mt-0 text-center">{!quote ? "" : quote.topic}</h4>
-          <p className="mb-0">{!quote ? "" : quote.text}</p>
+          {quote && (
+            <CSSTransition
+              nodeRef={quoteDivRef}
+              key={quote?._id}
+              timeout={500}
+              classNames="fade"
+              in={quoteVisible}
+              appear={true}
+            >
+              <div ref={quoteDivRef}>
+                <h4 className="mt-0 text-center">{quote?.topic}</h4>
+                <p className="mb-0">{quote?.text}</p>
+              </div>
+            </CSSTransition>
+          )}
         </div>
       </div>
     </>
