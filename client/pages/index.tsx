@@ -31,7 +31,7 @@ export default function Home() {
     }
   );
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  /* Used for quote transitions */
   const [quoteVisible, setQuoteVisible] = useState(true);
   const quoteDivRef = useRef(null);
   const [loadingHidden, setLoadingHidden] = useState(true);
@@ -61,12 +61,7 @@ export default function Home() {
       <Head>
         <title>Daily Quote</title>
       </Head>
-      <DayPickerDialog
-        selected={date.toDate()}
-        onSelect={(d) => setDate(dayjs(d))}
-        open={dialogOpen}
-        setOpen={setDialogOpen}
-      />
+
       <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full">
         <h2 className="relative text-center border rounded-lg p-2 m-0">
           Daily Quote
@@ -74,15 +69,7 @@ export default function Home() {
         </h2>
         <div className="border rounded-lg flex justify-between p-2">
           <ArrowButton direction="left" onClick={() => previousDate()} />
-          <button
-            type="button"
-            className="font-bold"
-            onClick={() => {
-              setDialogOpen(!dialogOpen);
-            }}
-          >
-            {date.format("D MMMM")}
-          </button>
+          <DayPickerDialog date={date} setDate={(d: any) => setDate(dayjs(d))} />
           <ArrowButton direction="right" onClick={() => nextDate()} />
         </div>
         <div className="border rounded-lg p-4 flex-grow-1 h-fit overflow-auto">
