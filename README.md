@@ -1,12 +1,14 @@
 # Daily Quote
 
+Link: https://c-shubh.github.io/daily-quote/
+
 Shows a quote from _Daily Inspiration From The Monk Who Sold His Ferrari by Robin Sharma_
 
 ### Instructions to run locally
 
 - Clone repo
 
-- #### Client
+- Client
 
   ```
   $ cd client/
@@ -26,7 +28,7 @@ Shows a quote from _Daily Inspiration From The Monk Who Sold His Ferrari by Robi
   $ pnpm dev
   ```
 
-- #### Server
+- Server
 
   ```
   $ cd server/
@@ -63,3 +65,4 @@ Shows a quote from _Daily Inspiration From The Monk Who Sold His Ferrari by Robi
 
 - Frontend - [GitHub Pages](https://pages.github.com/)
 - Backend - [Render](https://render.com/)
+- Database - [MongoDB Atlas](https://www.mongodb.com/atlas/database)
