@@ -1,6 +1,5 @@
-import { DayPicker } from "react-day-picker";
-
 import { Dispatch, SetStateAction } from "react";
+import { DayPicker } from "react-day-picker";
 
 import {
   Button,
@@ -11,11 +10,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 
-export default function DayPickerDialog(props: { date: dayjs.Dayjs; setDate: Dispatch<SetStateAction<dayjs.Dayjs>> }) {
+interface DayPickerDialogProps {
+  date: dayjs.Dayjs;
+  setDate: Dispatch<SetStateAction<dayjs.Dayjs>>;
+}
+
+export default function DayPickerDialog(props: DayPickerDialogProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

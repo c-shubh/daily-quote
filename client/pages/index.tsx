@@ -6,9 +6,10 @@ import { CSSTransition } from "react-transition-group";
 import ArrowButton from "../components/ArrowButton";
 import DayPickerDialog from "../components/DayPickerDialog";
 import InfoModal from "../components/InfoModal";
+import type { Quote } from "../types";
 
 /* Fetch quote for given `date` from db */
-async function fetchQuote(date: dayjs.Dayjs) {
+async function fetchQuote(date: dayjs.Dayjs): Promise<Quote> {
   const month = date.format("MMMM");
   const dateOfMonth = date.format("D");
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${month}/${dateOfMonth}`);
@@ -23,13 +24,7 @@ export default function Home() {
   const [date, setDate] = useState(dayjs());
 
   /* Quote as returned from db */
-  const [quote, setQuote] = useState(
-    null as unknown as {
-      _id: string;
-      topic: string;
-      text: string;
-    }
-  );
+  const [quote, setQuote] = useState<Quote>();
 
   /* Used for quote transitions */
   const [quoteVisible, setQuoteVisible] = useState(true);
@@ -62,7 +57,7 @@ export default function Home() {
         <title>Daily Quote</title>
       </Head>
 
-      <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full">
+      <div className="prose mx-6 py-6 flex flex-col space-y-4 h-full sm:mx-auto">
         <h2 className="relative text-center border rounded-lg p-2 m-0">
           Daily Quote
           <InfoModal />
