@@ -9,7 +9,10 @@ const customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
 
 const { Schema } = mongoose;
-mongoose.connect(process.env.MONGODB_CONNSTRING);
+mongoose.connect(process.env.MONGODB_CONNSTRING, (err)=>{
+  if(err) console.error(err);
+  else console.log('Connected to database')
+});
 
 const monkQuoteSchema = new Schema({
   date: String,
