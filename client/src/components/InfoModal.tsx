@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { BsInfoCircle } from "react-icons/bs";
 
-export default function BasicUsage() {
+export default function InfoModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

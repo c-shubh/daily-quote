@@ -10,7 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 

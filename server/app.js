@@ -9,9 +9,9 @@ const customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
 
 const { Schema } = mongoose;
-mongoose.connect(process.env.MONGODB_CONNSTRING, (err)=>{
-  if(err) console.error(err);
-  else console.log('Connected to database')
+mongoose.connect(process.env.MONGODB_CONNSTRING, (err) => {
+  if (err) console.error(err);
+  else console.log("Connected to database");
 });
 
 const monkQuoteSchema = new Schema({
@@ -28,13 +28,17 @@ app.use(cors());
 app.get("/monk-quote/:month/:day", async (req, res) => {
   const date = dayjs(`${req.params.month} ${req.params.day}`);
   if (!date.isValid()) {
-    res.status(404).send("Invalid date.");
+    return res.status(404).send("Invalid date.");
   }
   const formattedDate = date.format("MMMM D");
+  let data = null;
+  try {
+    data = await MonkQuote.findOne({ date: formattedDate });
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
 
-  data = await MonkQuote.findOne({ date: formattedDate });
-
-  res.send(data);
+  return res.json(data);
 });
 
 app.listen(process.env.PORT, () => {
