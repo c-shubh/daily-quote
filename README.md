@@ -19,7 +19,7 @@ Shows a quote from _Daily Inspiration From The Monk Who Sold His Ferrari by Robi
   Contents of **.env.development.local**:
 
   ```env
-  NEXT_PUBLIC_API_URL='http://localhost:8080/monk-quote'
+  NEXT_PUBLIC_API_URL='http://localhost:8080/'
   ```
 
   Start Next.js dev server:

@@ -14,7 +14,7 @@ import type { Quote } from "../types";
 async function fetchQuote(date: dayjs.Dayjs): Promise<Quote> {
   const month = date.format("MMMM");
   const dateOfMonth = date.format("D");
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${month}/${dateOfMonth}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/monk-quote/${month}/${dateOfMonth}`);
   console.log(response);
   const quote_resp = await response.json();
   return quote_resp;
